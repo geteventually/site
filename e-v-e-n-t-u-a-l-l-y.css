@@ -33,27 +33,17 @@ shell {
   margin: 0 auto;
 }
 
-masthead {
-  display: block;
-  font-size: 27px;
-  margin-bottom: 4vh;
-  line-height: 1.19;
-  margin-top: 20vh;
-  font-optical-sizing: auto;
-  font-weight: 600;
-}
-
 hero {
   display: block;
-  font-size: clamp(3.75rem, 1.0714rem + 8.5714vw, 7.5rem);
+  font-size: clamp(2.75rem, 0.9rem + 6vw, 5.75rem);
   font-style: normal;
   font-variation-settings: normal;
   font-weight: 600;
-  letter-spacing: -1.2px;
-  line-height: 1.18;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
   margin-bottom: 0;
-  margin-top: 0;
-  --prop-size: clamp(2.5rem, 0.88em, 6.875rem);
+  margin-top: clamp(2rem, 7vh, 5rem);
+  --prop-size: clamp(2.1rem, 0.85em, 5.25rem);
   --prop-shift-y: 0.08em;
   --prop-pull-x: -0.14em;
 }
@@ -137,24 +127,25 @@ balloon:focus:not(:active) #balloon-4 {
 }
 
 cta blurb {
-  font-size: 16px;
+  font-size: 15px;
   opacity: 0.4;
   display: block;
-  margin: 20px 0;
+  margin: 12px auto 8px;
+  max-width: 36em;
 }
 
 cta action,
 actions action {
-  font-size: 22px;
+  font-size: 18px;
   color: #fff;
   background: #000;
-  padding: 20px 40px;
-  border-radius: 20px;
+  padding: 16px 32px;
+  border-radius: 18px;
   display: inline-block;
-  margin: 20px auto 10px;
+  margin: 12px auto 8px;
   text-decoration: none;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.04em;
   transition: all 0.17s ease-out;
   transform: scale(1);
 }
@@ -166,6 +157,8 @@ actions action:hover {
 
 cta note {
   display: block;
+  font-size: 14px;
+  opacity: 0.55;
 }
 
 story heading {
