@@ -21,7 +21,7 @@ Eventually is the calm, slightly mischievous “later” that actually shows up 
 3. **Mischievous** — a wink is allowed; props and play are part of the brand
 4. **Deadpan** — humor lands flat and dry, not hypey
 
-**Both quiet utility and memorable weird.** The product experience stays calm; the marketing surface can be memorable and a little strange — as long as it still feels like the same brand.
+**Both understated utility and memorable weird.** The product experience stays calm; the marketing surface can be memorable and a little strange — as long as it still feels like the same brand.
 
 ## Aesthetic keywords
 

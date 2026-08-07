@@ -11,7 +11,7 @@ Canonical values for the marketing site and brand surfaces. Prefer these names o
 | `color-accent` | `#fffd01` | Highlighter — selection, rare emphasis |
 | `color-fg-muted` | `rgba(0, 0, 0, 0.6)` | Tagline, copyright (~opacity 0.6) |
 | `color-fg-subtle` | `rgba(0, 0, 0, 0.4)` | Blurbs under hero (~opacity 0.4) |
-| `color-surface-quiet` | `rgba(0, 0, 0, 0.02)` | Quiet pads / soft bands only if needed |
+| `color-surface-soft` | `rgba(0, 0, 0, 0.02)` | Soft pads / bands only if needed |
 | `color-cta-fg` | `#ffffff` | Text on black buttons |
 | `color-cta-bg` | `#000000` | Primary button fill |
 
@@ -85,7 +85,7 @@ Keep motion small and purposeful (CTA + prop states). No ambient glow loops.
   --color-accent: #fffd01;
   --color-fg-muted: rgba(0, 0, 0, 0.6);
   --color-fg-subtle: rgba(0, 0, 0, 0.4);
-  --color-surface-quiet: rgba(0, 0, 0, 0.02);
+  --color-surface-soft: rgba(0, 0, 0, 0.02);
   --color-cta-fg: #ffffff;
   --color-cta-bg: #000000;
 
