@@ -234,6 +234,7 @@ thumbs {
   top: 0.02em;
   vertical-align: -0.16em;
   pointer-events: none;
+  transform: translateY(-5%);
 }
 
 saved img {
