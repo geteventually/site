@@ -62,9 +62,37 @@
           "operatingSystem": "Chrome",
           "description": "A tiny browser extension that emails you the tweets you meant to come back to, but never did. No dashboards, no complicated filters — just a small, steady stream of past gems delivered to your inbox. Works with X bookmarks.",
           "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
+            "@type": "AggregateOffer",
+            "lowPrice": "4.08",
+            "highPrice": "7",
+            "priceCurrency": "USD",
+            "offerCount": "2",
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Monthly",
+                "price": "7",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": "7",
+                  "priceCurrency": "USD",
+                  "billingDuration": "P1M"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Yearly",
+                "price": "49",
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": "49",
+                  "priceCurrency": "USD",
+                  "billingDuration": "P1Y"
+                }
+              }
+            ]
           },
           "author": { "@id": "https://geteventually.com/#organization" },
           "url": "https://geteventually.com",
@@ -670,11 +698,18 @@
         let lastFocus = null;
         let closeTimer = 0;
 
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            notify.dataset.ready = "true";
-          });
-        });
+        function revealNotify() {
+          if (notify.dataset.ready === "true") return;
+          notify.dataset.ready = "true";
+          window.removeEventListener("scroll", onScrollReveal);
+        }
+
+        function onScrollReveal() {
+          if (window.scrollY > 20) revealNotify();
+        }
+
+        window.addEventListener("scroll", onScrollReveal, { passive: true });
+        onScrollReveal();
 
         function setMailOriginFromNotify() {
           const stage = notify.closest("stage") || notify.parentElement;
