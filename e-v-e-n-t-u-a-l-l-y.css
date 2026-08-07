@@ -895,11 +895,11 @@ digest-foot {
 
 @media (max-width: 720px) {
   pad {
-    
-    width: 100%;
+    --pad-ratio: 1 / 1;
+    width: min(100%, calc(100vw - 32px), 80vh);
     max-width: none;
-    height: 99vh;
-    aspect-ratio: auto;
+    height: auto;
+    aspect-ratio: var(--pad-ratio);
     margin: 24px auto;
     border-radius: 28px;
   }
@@ -907,7 +907,9 @@ digest-foot {
   notify {
     top: 14px;
     right: 14px;
-    width: min(344px, calc(100% - 28px));
+    left: 14px;
+    width: auto;
+    max-width: none;
   }
 
   mail {
