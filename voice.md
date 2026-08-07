@@ -2,7 +2,7 @@
 
 ## Voice vs tone
 
-**Voice** (always): calm, sharp, mischievous, deadpan.  
+**Voice** (always): calm, sharp, mischievous, deadpan.
 **Tone** (shifts): wry on the homepage; clearer and warmer in product/email; plain and precise in legal/support.
 
 ## Address
@@ -24,27 +24,27 @@ Humor: **both** dry wink *and* occasional absurdity (balloon-level) are allowed 
 
 ## We love
 
-- revisit  
-- past gems  
-- later  
-- saved / bookmarks  
-- calm, daily, steady, snackable  
-- dusty pile → inbox  
+- revisit
+- past gems
+- later
+- saved / bookmarks
+- calm, daily, steady, snackable
+- dusty pile → inbox
 - “oh right, that thread!”
 
 ## We ban
 
-- AI-powered  
-- productivity  
-- inbox zero  
-- unlock  
+- AI-powered
+- productivity
+- inbox zero
+- unlock
 - also avoid: game-changer, leverage, seamless, next-gen, optimize your workflow, revolutionary
 
 ## Messaging pillars
 
-1. **Recognition** — You save more than you revisit.  
-2. **Promise** — Later should keep its promise.  
-3. **Mechanism** — A tiny extension → a calm email of past gems.  
+1. **Recognition** — You save more than you revisit.
+2. **Promise** — Later should keep its promise.
+3. **Mechanism** — A tiny extension → a calm email of past gems.
 4. **Anti-complexity** — No dashboards, no complicated filters.
 
 ## Value prop (canonical)
@@ -60,7 +60,7 @@ Crafted for people with overflowing bookmark folders.
 | Context | Prefer | Avoid |
 |---------|--------|-------|
 | Primary | Download Chrome Extension · Get Eventually | Unlock now · Start free trial (unless true) |
-| Setup reassurance | Takes less than 5 minutes to set up. | Instant AI magic |
+| Setup reassurance | Takes a few minutes to set up. | Instant AI magic |
 | Compatibility | Works with X bookmarks. · Safari & Firefox coming soon | Works everywhere!! |
 
 When Safari/Firefox ship, name them plainly — same calm voice, no fanfare inflation.
@@ -85,11 +85,11 @@ When Safari/Firefox ship, name them plainly — same calm voice, no fanfare infl
 
 ## Company naming
 
-Public brand: **Eventually**.  
+Public brand: **Eventually**.
 Legal entity (later): Becomes Tech LLC — use in footer/legal only when ready; don’t force into marketing voice.
 
 ## Voice test
 
-1. Would Pocket or Notion say this the same way? If yes → sharpen.  
-2. Does it make a busy X saver nod “yeah, that’s me”?  
+1. Would Pocket or Notion say this the same way? If yes → sharpen.
+2. Does it make a busy X saver nod “yeah, that’s me”?
 3. Is it calm *and* specific — not vague positivity?
