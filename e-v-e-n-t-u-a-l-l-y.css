@@ -699,7 +699,7 @@ digest-foot {
 
   mail {
     width: calc(100% - 28px);
-    height: min(480px, calc(100% - 40px));
+    height: calc(100% - 32px);
   }
 
   mail-chrome {
