@@ -30,7 +30,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..900;1,300..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Open+Sans:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="e-v-e-n-t-u-a-l-l-y.css" />
@@ -170,7 +170,149 @@
         <action href="#">Download Chrome Extension</action>
         <note>Works with X bookmarks.</note>
       </cta>
-      <pad></pad>
+      <pad aria-label="Product preview">
+        <stage>
+          <notify
+            role="button"
+            tabindex="0"
+            id="mac-notify"
+            aria-controls="mac-mail"
+            aria-expanded="false"
+            aria-label="Open Mail notification: 5 bookmarks worth revisiting"
+          >
+            <notify-chrome aria-hidden="true">
+              <notify-dodge></notify-dodge>
+              <notify-tint></notify-tint>
+              <notify-glass></notify-glass>
+              <notify-rim></notify-rim>
+            </notify-chrome>
+            <notify-icon>
+              <img src="/apple_mail.png" width="32" height="32" alt="" draggable="false" />
+            </notify-icon>
+            <notify-body>
+              <notify-title>5 bookmarks worth revisiting</notify-title>
+              <notify-preview
+                >Eventually — A few things you saved and meant to come back
+                to.</notify-preview
+              >
+            </notify-body>
+            <notify-time>now</notify-time>
+          </notify>
+
+          <mail
+            id="mac-mail"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mac-mail-subject"
+            hidden
+          >
+            <mail-chrome>
+              <mail-traffic>
+                <traffic-btn class="close" role="button" tabindex="0" aria-label="Close"></traffic-btn>
+                <traffic-btn class="minimize" aria-hidden="true"></traffic-btn>
+                <traffic-btn class="zoom" aria-hidden="true"></traffic-btn>
+              </mail-traffic>
+              <mail-title>Inbox</mail-title>
+              <mail-toolbar aria-hidden="true">
+                <span></span><span></span><span></span>
+              </mail-toolbar>
+            </mail-chrome>
+            <mail-header>
+              <mail-row>
+                <mail-label>From:</mail-label>
+                <mail-value
+                  ><strong>Eventually</strong>
+                  &lt;digest@geteventually.com&gt;</mail-value
+                >
+              </mail-row>
+              <mail-row>
+                <mail-label>Subject:</mail-label>
+                <mail-value id="mac-mail-subject"
+                  ><strong>5 bookmarks worth revisiting</strong></mail-value
+                >
+              </mail-row>
+              <mail-row>
+                <mail-label>Date:</mail-label>
+                <mail-value>Today at 9:00 AM</mail-value>
+              </mail-row>
+              <mail-row>
+                <mail-label>To:</mail-label>
+                <mail-value>you@email.com</mail-value>
+              </mail-row>
+            </mail-header>
+            <mail-body>
+              <digest>
+                <digest-brand>Eventually</digest-brand>
+                <digest-lede
+                  >5 bookmarks you saved and wanted to revisit.</digest-lede
+                >
+
+                <digest-item>
+                  <digest-author>Lenny Rachitsky (@lennyrachitsky)</digest-author>
+                  <digest-text
+                    >The best career advice I ever got: optimize for rate of
+                    learning, not prestige or pay. Everything else compounds from
+                    there.</digest-text
+                  >
+                  <digest-link href="https://x.com" tabindex="-1"
+                    >Open on X →</digest-link
+                  >
+                </digest-item>
+
+                <digest-item>
+                  <digest-author>Julian Shapiro (@Julian)</digest-author>
+                  <digest-text
+                    >Tutorial rabbit holes feel productive. Shipping one ugly
+                    draft teaches more than ten pristine bookmarks.</digest-text
+                  >
+                  <digest-link href="https://x.com" tabindex="-1"
+                    >Open on X →</digest-link
+                  >
+                </digest-item>
+
+                <digest-item>
+                  <digest-author>Anne-Laure Le Cunff (@neuranne)</digest-author>
+                  <digest-text
+                    >You don’t need another system. You need a small loop you’ll
+                    actually repeat — capture, revisit, act.</digest-text
+                  >
+                  <digest-link href="https://x.com" tabindex="-1"
+                    >Open on X →</digest-link
+                  >
+                </digest-item>
+
+                <digest-item>
+                  <digest-author>Packy McCormick (@packyM)</digest-author>
+                  <digest-text
+                    >Most “I’ll read this later” tabs are just anxiety in
+                    disguise. Close the loop or delete the promise.</digest-text
+                  >
+                  <digest-link href="https://x.com" tabindex="-1"
+                    >Open on X →</digest-link
+                  >
+                </digest-item>
+
+                <digest-item>
+                  <digest-author>Nat Eliason (@nateliason)</digest-author>
+                  <digest-text
+                    >Self-improvement without a revisit ritual is just
+                    collecting. Put the idea back in front of future-you.</digest-text
+                  >
+                  <digest-link href="https://x.com" tabindex="-1"
+                    >Open on X →</digest-link
+                  >
+                </digest-item>
+
+                <digest-foot>
+                  You get these because reminders are on in the Eventually
+                  extension. Open the extension to change your rhythm or
+                  pause.
+                </digest-foot>
+              </digest>
+            </mail-body>
+          </mail>
+        </stage>
+      </pad>
       <story>
         <heading>
           <brand>Eventually</brand> is a simple extension that turns your dusty pile of saved
@@ -219,5 +361,59 @@
       <tagline> Crafted for people with overflowing bookmark folders </tagline>
       <copy>©2026 <brand>Eventually</brand></copy>
     </shell>
+    <script>
+      (function macMailPreview() {
+        const notify = document.getElementById("mac-notify");
+        const mail = document.getElementById("mac-mail");
+        const closeBtn = mail && mail.querySelector("traffic-btn.close");
+        if (!notify || !mail || !closeBtn) return;
+
+        let lastFocus = null;
+
+        function openMail() {
+          lastFocus = document.activeElement;
+          mail.hidden = false;
+          notify.setAttribute("aria-expanded", "true");
+          notify.dataset.dismissed = "true";
+          requestAnimationFrame(() => {
+            mail.dataset.open = "true";
+            closeBtn.focus();
+          });
+        }
+
+        function closeMail() {
+          delete mail.dataset.open;
+          notify.setAttribute("aria-expanded", "false");
+          delete notify.dataset.dismissed;
+          window.setTimeout(() => {
+            if (mail.dataset.open) return;
+            mail.hidden = true;
+            (lastFocus || notify).focus();
+          }, 280);
+        }
+
+        function onActivate(event) {
+          if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          if (mail.dataset.open) closeMail();
+          else openMail();
+        }
+
+        notify.addEventListener("click", onActivate);
+        notify.addEventListener("keydown", onActivate);
+        closeBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+          closeMail();
+        });
+        closeBtn.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          closeMail();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && mail.dataset.open) closeMail();
+        });
+      })();
+    </script>
   </body>
 </html>

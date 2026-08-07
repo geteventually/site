@@ -258,11 +258,432 @@ saved img {
 
 pad {
   display: block;
+  box-sizing: border-box;
+  /* Height-led: 80vh → width from current 1236×800 ratio; never wider than shell */
+  width: min(100%, calc(80vh * 1236 / 800));
+  aspect-ratio: 1236 / 800;
+  height: auto;
+  margin: 80px auto;
   border-radius: 60px;
-  background-color: rgba(0, 0, 0, 0.02);
-  padding: 280px 0;
-  margin: 80px 0;
-  height: 800px;
+  overflow: hidden;
+  position: relative;
+  background-color: #dfe6ea;
+  background-image: url('/pad.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+stage {
+  display: block;
+  position: absolute;
+  inset: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+    'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* —— macOS notification (Figma macOS 26 · node 684:21831) —— */
+notify {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  width: min(344px, calc(100% - 44px));
+  padding: 12px 9px 12px 13px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(245, 245, 245, 0.45);
+  color: rgba(0, 0, 0, 0.85);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.22s ease;
+  outline: none;
+  /* Vibrancy: blur what sits behind (pad photo) */
+  -webkit-backdrop-filter: blur(50px) saturate(190%) brightness(1.05);
+  backdrop-filter: blur(50px) saturate(190%) brightness(1.05);
+  /* Fill + Shadow — Figma: 0 8px 40px / 12% */
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+notify > *:not(notify-chrome) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glass stack matching Figma: dodge → tint → screen → rim */
+notify-chrome {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+notify-dodge {
+  position: absolute;
+  inset: 0;
+  background: #262626;
+  mix-blend-mode: color-dodge;
+}
+
+notify-tint {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 245, 245, 0.67);
+}
+
+notify-glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  mix-blend-mode: screen;
+}
+
+notify-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -0.5px 0 rgba(0, 0, 0, 0.04),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 32%,
+    rgba(255, 255, 255, 0) 60%
+  );
+}
+
+notify:hover {
+  transform: scale(1.012);
+}
+
+notify:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(0, 122, 255, 0.45),
+    0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+notify[data-dismissed='true'] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.98);
+}
+
+notify-icon {
+  display: block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 7.2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+notify-icon img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+notify-body {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+notify-time {
+  display: block;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 14px;
+  color: #bfbfbf;
+  text-align: right;
+  white-space: nowrap;
+}
+
+notify-title {
+  display: block;
+  width: 100%;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.26px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+notify-preview {
+  display: -webkit-box;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.104px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.85);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* —— macOS Mail window —— */
+mail {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  width: min(680px, calc(100% - 48px));
+  height: min(520px, calc(100% - 64px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.18),
+    0 22px 70px rgba(0, 0, 0, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+  transform: translate(-50%, -46%) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.85, 0.25, 1),
+    opacity 0.22s ease;
+  text-align: left;
+  color: #1d1d1f;
+}
+
+mail[hidden] {
+  display: none;
+}
+
+mail[data-open='true'] {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+mail-chrome {
+  display: grid;
+  grid-template-columns: 68px 1fr 68px;
+  align-items: center;
+  height: 46px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #ededed 0%, #e2e2e2 100%);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.18);
+  flex-shrink: 0;
+}
+
+mail-traffic {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+traffic-btn {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+  cursor: default;
+}
+
+traffic-btn.close {
+  background: #ff5f57;
+  cursor: pointer;
+}
+
+traffic-btn.minimize {
+  background: #febc2e;
+}
+
+traffic-btn.zoom {
+  background: #28c840;
+}
+
+traffic-btn.close:focus-visible {
+  outline: 2px solid rgba(0, 122, 255, 0.7);
+  outline-offset: 2px;
+}
+
+mail-title {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+mail-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  opacity: 0.35;
+}
+
+mail-toolbar span {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+mail-header {
+  display: block;
+  padding: 14px 18px 12px;
+  background: #fafafa;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+mail-row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+mail-row + mail-row {
+  margin-top: 2px;
+}
+
+mail-label {
+  color: rgba(60, 60, 67, 0.55);
+  text-align: right;
+}
+
+mail-value {
+  color: #1d1d1f;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+mail-value strong {
+  font-weight: 600;
+}
+
+mail-body {
+  display: block;
+  flex: 1;
+  overflow: auto;
+  background: #faf9f6;
+  -webkit-overflow-scrolling: touch;
+}
+
+digest {
+  display: block;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 28px 22px 36px;
+}
+
+digest-brand {
+  display: block;
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+digest-lede {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+digest-item {
+  display: block;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+digest-author {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+digest-text {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+digest-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #b8860b;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+digest-foot {
+  display: block;
+  margin-top: 24px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #999;
+}
+
+@media (max-width: 720px) {
+  pad {
+    border-radius: 32px;
+    margin: 48px auto;
+  }
+
+  notify {
+    top: 14px;
+    right: 14px;
+    width: min(344px, calc(100% - 28px));
+  }
+
+  mail {
+    width: calc(100% - 28px);
+    height: min(480px, calc(100% - 40px));
+  }
+
+  mail-chrome {
+    grid-template-columns: 68px 1fr 24px;
+  }
+
+  mail-toolbar {
+    display: none;
+  }
 }
 
 story {
