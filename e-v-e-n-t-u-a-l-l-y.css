@@ -619,6 +619,14 @@ mail-title {
   pointer-events: none;
 }
 
+mail-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 mail-header {
   display: block;
   padding: 14px 18px 12px;
@@ -894,9 +902,13 @@ digest-foot {
 }
 
 @media (max-width: 720px) {
+  shell {
+    padding-inline: 8px;
+  }
+
   pad {
     --pad-ratio: 1 / 1;
-    width: min(100%, calc(100vw - 32px), 80vh);
+    width: min(100%, 80vh);
     max-width: none;
     height: auto;
     aspect-ratio: var(--pad-ratio);
@@ -915,6 +927,21 @@ digest-foot {
   mail {
     width: calc(100% - 28px);
     height: calc(100% - 32px);
+  }
+
+  /* Scroll below the Inbox chrome so the scrollbar sits in the window body */
+  mail-pane {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  mail-body {
+    flex: none;
+    overflow: visible;
+  }
+
+  tweet-read {
+    display: none;
   }
 }
 
