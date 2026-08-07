@@ -561,14 +561,14 @@ mail[data-open='true'] {
 }
 
 mail-chrome {
-  display: grid;
-  grid-template-columns: 68px 1fr;
+  display: flex;
   align-items: center;
   height: 46px;
   padding: 0 12px;
   background: linear-gradient(180deg, #ededed 0%, #e2e2e2 100%);
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.18);
   flex-shrink: 0;
+  position: relative;
 }
 
 mail-traffic {
@@ -605,12 +605,14 @@ traffic-btn.close:focus-visible {
 }
 
 mail-title {
-  display: block;
-  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: rgba(0, 0, 0, 0.75);
+  pointer-events: none;
 }
 
 mail-header {
