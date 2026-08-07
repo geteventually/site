@@ -50,21 +50,25 @@ hero {
   font-variation-settings: normal;
   font-weight: 600;
   letter-spacing: -1.2px;
-  line-height: 1.05;
+  line-height: 1.18;
   margin-bottom: 0;
   margin-top: 0;
+  --prop-size: clamp(2.5rem, 0.88em, 6.875rem);
+  --prop-shift-y: 0.08em;
+  --prop-pull-x: -0.14em;
 }
 
 hero svg {
-  width: clamp(3.125rem, 0.8929rem + 7.1429vw, 6.25rem);
-  height: clamp(3.125rem, 0.8929rem + 7.1429vw, 6.25rem);
+  width: var(--prop-size);
+  height: var(--prop-size);
   display: inline-block;
+  vertical-align: -0.2em;
   position: relative;
-  top: 10px;
 }
 
 wrap {
-  display: inline-block;
+  display: inline;
+  white-space: nowrap;
 }
 
 balloon {
@@ -73,17 +77,21 @@ balloon {
   padding: 0;
   color: inherit;
   cursor: cell;
-  width: 110px;
-  height: 110px;
+  width: var(--prop-size);
+  height: var(--prop-size);
   position: relative;
-  top: 20px;
-  margin-right: -20px;
+  top: 0.02em;
+  margin: 0 var(--prop-pull-x) 0 0.02em;
+  vertical-align: -0.16em;
+  flex-shrink: 0;
 }
 
 balloon img {
   pointer-events: none;
-  width: 110px;
-  height: 110px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -212,19 +220,33 @@ footlinks dot {
 }
 
 saved {
-  display: inline-block;
+  display: inline;
   position: relative;
-  z-index: -1;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+thumbs {
+  display: inline-block;
+  width: var(--prop-size);
+  height: var(--prop-size);
+  margin: 0 var(--prop-pull-x) 0 0.02em;
+  position: relative;
+  top: 0.02em;
+  vertical-align: -0.16em;
+  pointer-events: none;
 }
 
 saved img {
-  width: 110px;
-  height: 110px;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+}
+
+badge {
   position: relative;
-  top: 20px;
-  left: 0;
-  margin-right: -20px;
+  z-index: 1;
 }
 
 pad {
