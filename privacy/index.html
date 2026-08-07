@@ -4,90 +4,245 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy – Eventually</title>
+  <meta name="description" content="Privacy Policy for Eventually, operated by Becomes Tech, LLC." />
   <style>
     :root { font-family: system-ui, -apple-system, sans-serif; color: #1a1a1a; background: #fff; line-height: 1.6; }
     body { max-width: 720px; margin: 0 auto; padding: 1.5rem 1rem; }
     h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
     .updated { font-size: 0.875rem; color: #666; margin-bottom: 1.5rem; }
     h2 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    h3 { font-size: 1rem; margin-top: 1.15rem; margin-bottom: 0.4rem; }
     p, ul { margin: 0 0 0.75rem 0; }
     ul { padding-left: 1.25rem; }
     a { color: #0ea5e9; }
     .back { display: inline-block; margin-bottom: 1rem; font-size: 0.875rem; }
+    address { font-style: normal; margin: 0 0 0.75rem 0; }
   </style>
 </head>
 <body>
-  <a class="back" href="#" id="back">← Back</a>
+  <a class="back" href="/" id="back">← Back</a>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: February 2025</p>
+  <p class="updated">Last updated: August 7, 2026</p>
 
-  <p>This Privacy Policy describes how Eventually (the “<strong>extension</strong>” or “<strong>we</strong>”) collects, uses, and shares information when you use the Eventually browser extension and related services. We display this policy before you sign up or use the service, as required by policies such as the <a href="https://developer.x.com/developer-terms/policy" target="_blank" rel="noopener">X Developer Policy</a>. Our practices are intended to be no less protective of your privacy than <a href="https://x.com/privacy" target="_blank" rel="noopener">X’s Privacy Policy</a> where they apply to your use of X through our extension.</p>
+  <p>This Privacy Policy explains how <strong>Eventually</strong> (“<strong>we</strong>”, “<strong>us</strong>”, “<strong>our</strong>”) collects, uses, and protects information when you use our browser extension and related services (collectively, the “<strong>Service</strong>”).</p>
+  <p>By using the Service, you agree to the collection and use of information in accordance with this Policy.</p>
 
-  <h2>1. Information We Collect</h2>
-  <p>We may collect the following categories of information:</p>
+  <h2>1. Who we are</h2>
+  <p>Eventually is operated by <strong>Becomes Tech, LLC</strong>, a Delaware limited liability company.</p>
+  <p>Registered / mailing address:</p>
+  <address>
+    Becomes Tech, LLC<br />
+    1111b South Governors Avenue<br />
+    Dover, DE 19904<br />
+    United States
+  </address>
+  <p>Eventually is a personal productivity tool that helps you back up and organize your own bookmarks from X (<a href="https://x.com" target="_blank" rel="noopener noreferrer">https://x.com</a>). Becomes Tech, LLC is the data controller for information we collect and process through the Service.</p>
+  <p>If you have any questions, you can contact us at:</p>
   <ul>
-    <li><strong>Account and identity information</strong> – When you sign in with X (Twitter), we receive information from X’s OAuth flow that may include your X user ID, display name, handle, profile image URL, and email (if provided by X). We do not store your X password.</li>
-    <li><strong>Bookmarks and X content</strong> – When you use the sync feature on x.com/i/bookmarks, the extension reads the bookmarks visible on that page (e.g. post IDs, URLs, text, author handle and name, media URLs, timestamps) and may send this data to our backend (e.g. Supabase) to store and sync your bookmarks. This data is treated as personal data when it can be linked to you.</li>
-    <li><strong>Technical and usage data</strong> – We may store your session (e.g. auth tokens) locally in the browser’s extension storage so you stay signed in. We do not collect your browsing history outside of the X bookmarks page when you choose to sync.</li>
+    <li>Email: <a href="mailto:support@geteventually.com">support@geteventually.com</a></li>
+    <li>Website: <a href="https://geteventually.com">https://geteventually.com</a></li>
   </ul>
 
-  <h2>2. How We Use This Information</h2>
-  <p>We use the information we collect to:</p>
+  <h2>2. What data we collect</h2>
+  <p>We only collect data that is necessary to provide the Service.</p>
+
+  <h3>2.1 X account information</h3>
+  <p>When you sign in with X via our authentication flow (using Supabase and X OAuth), we may receive:</p>
   <ul>
-    <li>Provide the extension’s features (sign-in, bookmark sync, and backup).</li>
-    <li>Authenticate you and keep your session.</li>
-    <li>Operate, secure, and improve our service and fix issues.</li>
-    <li>Comply with applicable law and enforce our <a href="/terms">Terms of Service</a>.</li>
+    <li>Your X user ID</li>
+    <li>Your X handle / username</li>
+    <li>Your display name</li>
+    <li>Your avatar URL</li>
+    <li>Your email address (if X and/or your permissions allow)</li>
+  </ul>
+  <p>We do <strong>not</strong> receive or store your X password.</p>
+
+  <h3>2.2 Bookmark / content data</h3>
+  <p>To provide the bookmark backup and organization features, we collect:</p>
+  <ul>
+    <li>The posts you have bookmarked on X (content of the post, author handle, timestamps, and public metadata like media URLs)</li>
+    <li>Basic metadata we derive when syncing (e.g. internal IDs, sync timestamps)</li>
+  </ul>
+  <p>These bookmark fields come from <strong>X’s internal Bookmarks GraphQL API</strong> (<code>x.com/i/api/graphql</code>), which the extension calls directly when you click sync. We <strong>do not read, scrape, or parse the HTML or DOM</strong> of the bookmarks page; the extension’s content script only displays the Eventually panel on that page.</p>
+  <p>We only process bookmarks for <strong>the X account that you explicitly connect</strong> to Eventually.</p>
+
+  <h3>2.3 Browser session data (X sync only)</h3>
+  <p>To call X’s Bookmarks GraphQL API on your behalf, the extension needs the same authentication X uses for your own requests. Using the browser <code>webRequest</code> permission, it observes <strong>outbound requests to X’s GraphQL API</strong> (<code>/i/api/graphql</code>) while you are logged in on <code>x.com</code>, and copies only these request headers when present: <code>authorization</code>, <code>cookie</code>, <code>x-csrf-token</code>. This data:</p>
+  <ul>
+    <li>stays in your browser only (<code>chrome.storage.session</code>)</li>
+    <li>is used only to call X’s Bookmarks GraphQL API when you start a sync</li>
+    <li>expires automatically after about 30 minutes</li>
+  </ul>
+  <p>We do <strong>not</strong> store your X password and <strong>never</strong> upload these session headers to Eventually servers. The extension does <strong>not</strong> capture headers from other (non-GraphQL) requests or from other websites, and it does not use them outside of syncing your bookmarks.</p>
+
+  <h3>2.4 Billing and payment data</h3>
+  <p>If you subscribe to reminder emails, payment is processed by Stripe. We may receive limited billing metadata from Stripe (for example, subscription status, customer ID, and plan). We do <strong>not</strong> store your full payment card number on our servers.</p>
+
+  <h3>2.5 Usage and technical data</h3>
+  <p>We may collect limited technical information when you use the extension or site, such as:</p>
+  <ul>
+    <li>Browser type and version</li>
+    <li>Operating system</li>
+    <li>Approximate time and date of use</li>
+    <li>Error logs and basic analytics (e.g. which features are used, sync counts)</li>
+  </ul>
+  <p>We do not attempt to track you across other websites.</p>
+
+  <h2>3. How we collect data</h2>
+  <p>We collect data in these main ways:</p>
+  <ul>
+    <li><strong>Directly from you</strong>: when you install the extension, sign in, configure email reminders, subscribe, or contact us.</li>
+    <li><strong>From X when you sync</strong>: using your existing browser login, the extension syncs your bookmarks in these steps:
+      <ol>
+        <li>You click sync in the extension.</li>
+        <li>The extension reads session headers from your own X GraphQL traffic (see section 2.3).</li>
+        <li>It calls X’s Bookmarks GraphQL API directly and parses the <strong>JSON response</strong>.</li>
+        <li>The resulting bookmark data is sent to our backend; the session headers stay in your browser.</li>
+      </ol>
+      <p>To be explicit about what we do <strong>not</strong> do:</p>
+      <ul>
+        <li>We do <strong>not</strong> use X’s official developer API for bookmarks.</li>
+        <li>We do <strong>not</strong> scrape or parse the bookmarks page HTML or DOM.</li>
+        <li>We do <strong>not</strong> intercept or read GraphQL <strong>response bodies</strong> from your page traffic; we only read outbound request headers for authentication.</li>
+      </ul>
+    </li>
+    <li><strong>From our infrastructure providers</strong>: Supabase (auth and database), our backend API, Stripe (billing), Resend (email delivery), and hosting providers may log technical events.</li>
   </ul>
 
-  <h2>3. How We Share This Information</h2>
-  <p>We may share information as follows:</p>
+  <h3>Browser permissions</h3>
+  <p>The extension requests the following permissions:</p>
   <ul>
-    <li><strong>With X (Twitter)</strong> – Sign-in and use of X’s services are subject to X’s Privacy Policy. When you sign in with X, X receives information per their OAuth and data practices. We do not share your synced bookmarks back to X except as needed to use X’s sign-in or as required by law.</li>
-    <li><strong>With our service providers</strong> – We use Supabase (and possibly other providers) to run our backend and store data. These providers process data on our instructions and are bound by confidentiality and data protection commitments.</li>
-    <li><strong>For legal reasons</strong> – We may disclose information if required by law, court order, or government request, or to protect our or others’ rights, safety, or property.</li>
+    <li><strong><code>webRequest</code></strong>: to capture your X GraphQL session headers for sync, as described in section 2.3. This is not general browsing surveillance; it only observes outbound requests to X’s GraphQL API.</li>
+    <li><strong>X GraphQL host access</strong> (<code>x.com</code> / <code>twitter.com</code> GraphQL endpoints): to capture session headers and fetch your bookmarks via X’s GraphQL API.</li>
+    <li><strong><code>storage</code></strong>: to save your Supabase login session (local) and your short-lived X auth headers (session).</li>
+    <li><strong><code>identity</code></strong>: for the OAuth redirect used to sign in with X via Supabase.</li>
+    <li><strong><code>tabs</code></strong>: to open or focus the bookmarks tab and clean up the OAuth redirect tab.</li>
+    <li><strong>Backend / Supabase host access</strong>: to authenticate and sync data with Eventually services.</li>
   </ul>
-  <p>We do not sell your personal information. We do not use X content or information obtained through the extension to target you with advertising outside of X’s platform, in line with the X Developer Agreement and Policy.</p>
 
-  <h2>4. Data Retention and Security</h2>
-  <p>We retain your account and bookmark data for as long as your account exists or as needed to provide the service and comply with law. You can stop using the extension and sign out at any time. We use industry-standard measures (including secure connections and access controls) to protect your data; no system is completely secure, and we cannot guarantee absolute security.</p>
-
-  <h2>5. Your Rights and Choices</h2>
-  <p>Depending on where you live, you may have the right to:</p>
+  <h2>4. Why we use your data (purposes)</h2>
+  <p>We use your data for the following purposes:</p>
   <ul>
-    <li>Access or receive a copy of the personal data we hold about you.</li>
-    <li>Correct or update that data.</li>
-    <li>Request deletion of your data.</li>
-    <li>Object to or restrict certain processing.</li>
-    <li>Withdraw consent where processing is based on consent.</li>
-    <li>Lodge a complaint with a supervisory authority.</li>
+    <li><strong>Provide the core Service</strong>
+      <ul>
+        <li>Authenticate you with your X account</li>
+        <li>Import, store, and display your X bookmarks back to you</li>
+        <li>Send optional reminder emails on a schedule you choose</li>
+        <li>Process subscriptions and manage billing status</li>
+      </ul>
+    </li>
+    <li><strong>Maintain and improve the Service</strong>
+      <ul>
+        <li>Monitor feature usage to understand what’s working</li>
+        <li>Diagnose crashes, bugs, and performance issues</li>
+        <li>Improve our user experience and reliability</li>
+      </ul>
+    </li>
+    <li><strong>Security and abuse prevention</strong>
+      <ul>
+        <li>Protect accounts from unauthorized access</li>
+        <li>Detect and prevent misuse or abuse of the Service</li>
+      </ul>
+    </li>
+    <li><strong>Legal and compliance</strong>
+      <ul>
+        <li>Respond to lawful requests and legal obligations</li>
+        <li>Enforce our terms and policies</li>
+      </ul>
+    </li>
   </ul>
-  <p>To exercise these rights or ask questions about your information, contact us using the details below. We will respond in line with applicable law. For data X holds, you may need to contact X directly (see <a href="https://x.com/privacy" target="_blank" rel="noopener">X’s Privacy Policy</a>).</p>
 
-  <h2>6. Children</h2>
-  <p>Eventually is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us so we can delete it.</p>
-
-  <h2>7. International Transfers</h2>
-  <p>Your information may be processed in the United States or other countries where our service providers operate. We take steps so that such transfers are consistent with applicable law (e.g. standard contractual clauses or other approved mechanisms where required).</p>
-
-  <h2>8. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. We will post the current version in the extension or on our website and indicate the “Last updated” date. Continued use after changes constitutes acceptance of the updated policy. If changes are material, we may provide additional notice where required by law.</p>
-
-  <h2>9. Contact Us</h2>
-  <p>For any inquiries or requests regarding your information, this Privacy Policy, or our practices (including to request access, correction, or deletion of your data), please contact us:</p>
+  <h2>5. Legal bases (EU/UK users)</h2>
+  <p>If you are located in the European Union, EFTA States, or the United Kingdom, we process your personal data under the following legal bases:</p>
   <ul>
-    <li>By email: at the contact address published for Eventually (e.g. on the extension’s store listing or website).</li>
-    <li>By mail or other contact method if we publish it on geteventually.com or in the extension.</li>
+    <li><strong>Contract performance</strong>: to provide the Service you request (authentication, bookmark syncing, email reminders, account management).</li>
+    <li><strong>Legitimate interests</strong>: to improve the Service, secure our systems, and prevent abuse, in a way that does not override your rights and freedoms.</li>
+    <li><strong>Consent</strong>: where required (for example, if we ever use optional cookies or analytics that are not strictly necessary).</li>
   </ul>
-  <p>We will respond to legitimate requests within the timeframes required by applicable law.</p>
+  <p>You can withdraw consent at any time where consent is the legal basis.</p>
+
+  <h2>6. How we share your data</h2>
+  <p>We do <strong>not</strong> sell or rent your personal data.</p>
+  <p>We may share your data with:</p>
+  <ul>
+    <li><strong>Infrastructure providers (processors)</strong>
+      <ul>
+        <li>Supabase (database, authentication)</li>
+        <li>Stripe (subscription billing)</li>
+        <li>Resend (transactional / digest email delivery)</li>
+        <li>Hosting / cloud providers (for our backend)</li>
+      </ul>
+      These providers act under contracts that require them to protect your data and use it only on our instructions.
+    </li>
+    <li><strong>Analytics / error tracking tools (if used)</strong> — used only to understand usage and errors; we avoid storing more than necessary.</li>
+    <li><strong>Legal and safety reasons</strong>
+      <ul>
+        <li>If required by law, court order, or to respond to lawful requests from authorities</li>
+        <li>To protect our rights, property, safety, or those of our users or the public</li>
+      </ul>
+    </li>
+  </ul>
+  <p>We do <strong>not</strong> provide your bookmarks or other X data to advertisers or data brokers.</p>
+
+  <h2>7. Data retention</h2>
+  <p>We keep your data only as long as necessary for the purposes described above:</p>
+  <ul>
+    <li>Account + bookmark data: retained while your account is active.</li>
+    <li>If you request deletion, we delete or anonymize your personal data within a reasonable period, except where we must retain certain information for legal, accounting, or security reasons.</li>
+    <li>Short-term logs and technical data may be kept for a limited time for debugging and security, then deleted or anonymized.</li>
+  </ul>
+
+  <h2>8. Your rights</h2>
+  <p>Depending on your location, you may have some or all of the following rights:</p>
+  <ul>
+    <li><strong>Access</strong> – request a copy of the personal data we hold about you.</li>
+    <li><strong>Correction</strong> – ask us to correct inaccurate or incomplete data.</li>
+    <li><strong>Deletion</strong> – request deletion of your data, subject to legal obligations.</li>
+    <li><strong>Restriction</strong> – ask us to limit certain processing.</li>
+    <li><strong>Portability</strong> – request your data in a structured, commonly used format.</li>
+    <li><strong>Objection</strong> – object to certain processing based on legitimate interests.</li>
+  </ul>
+  <p>To exercise any of these rights, contact us at <a href="mailto:support@geteventually.com">support@geteventually.com</a>. We may need to verify your identity before acting on the request.</p>
+  <p>You also have the right to lodge a complaint with your local data protection authority if you believe we are processing your data unlawfully.</p>
+
+  <h2>9. Security</h2>
+  <p>We use reasonable technical and organizational measures to protect your data, including:</p>
+  <ul>
+    <li>Encrypted connections (HTTPS) where applicable</li>
+    <li>Secure storage of data in reputable cloud providers</li>
+    <li>Limiting access to personal data to those who need it to operate the Service</li>
+  </ul>
+  <p>No system is perfectly secure, but we work to reduce risks of unauthorized access or disclosure.</p>
+  <p>If we become aware of a data breach that affects your personal data, we will notify you and relevant authorities as required by law.</p>
+
+  <h2>10. International transfers</h2>
+  <p>Our infrastructure providers (such as Supabase and hosting providers) may process data in countries outside your own, including the United States or other locations.</p>
+  <p>Where required by law, we rely on appropriate safeguards (such as standard contractual clauses) to protect your data when it is transferred internationally.</p>
+
+  <h2>11. Third-party services</h2>
+  <p>Our Service integrates with third-party platforms, most notably X, Supabase, and Stripe. Your use of those platforms is also governed by their own terms and privacy policies (for example, <a href="https://x.com/tos" target="_blank" rel="noopener noreferrer">https://x.com/tos</a> and <a href="https://x.com/privacy" target="_blank" rel="noopener noreferrer">https://x.com/privacy</a>).</p>
+  <p>We do not control how these third parties process your data once it is in their systems.</p>
+
+  <h2>12. Children’s privacy</h2>
+  <p>The Service is not intended for children under 13, and we do not knowingly collect personal data from children under 13. If you believe a child has provided us with personal data, please contact us so we can delete it.</p>
+
+  <h2>13. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. When we do, we will update the “Last updated” date at the top of this page. If changes are material, we will provide additional notice (for example, on our website or in the extension).</p>
+  <p>Your continued use of the Service after any changes means you accept the updated Policy.</p>
+
+  <h2>14. Contact us</h2>
+  <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact:</p>
+  <ul>
+    <li>Email: <a href="mailto:support@geteventually.com">support@geteventually.com</a></li>
+    <li>Website: <a href="https://geteventually.com">https://geteventually.com</a></li>
+    <li>Mail: Becomes Tech, LLC, 1111b South Governors Avenue, Dover, DE 19904, United States</li>
+  </ul>
 
   <script>
     document.getElementById('back').addEventListener('click', function(e) {
-      e.preventDefault();
       if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.getBackgroundPage) {
+        e.preventDefault();
         window.close();
-      } else {
-        history.back();
       }
     });
   </script>
