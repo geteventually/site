@@ -259,9 +259,11 @@ saved img {
 pad {
   display: block;
   box-sizing: border-box;
-  /* Height-led: 80vh → width from current 1236×800 ratio; never wider than shell */
-  width: min(100%, calc(80vh * 1236 / 800));
-  aspect-ratio: 1236 / 800;
+  
+  --pad-ratio: 1234 / 800;
+  width: min(100%, 1234px, calc(80vh * 1234 / 800));
+  max-width: 1234px;
+  aspect-ratio: var(--pad-ratio);
   height: auto;
   margin: 80px auto;
   border-radius: 60px;
@@ -283,7 +285,14 @@ stage {
   -webkit-font-smoothing: antialiased;
 }
 
-/* —— macOS notification (Figma macOS 26 · node 684:21831) —— */
+.liquid-glass-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 notify {
   position: absolute;
   top: 22px;
@@ -295,81 +304,85 @@ notify {
   width: min(344px, calc(100% - 44px));
   padding: 12px 9px 12px 13px;
   border-radius: 16px;
+  isolation: isolate;
   overflow: hidden;
-  background: rgba(245, 245, 245, 0.45);
   color: rgba(0, 0, 0, 0.85);
   text-align: left;
   cursor: pointer;
+  outline: none;
+
+  
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(18px) saturate(180%) brightness(1.1);
+  backdrop-filter: blur(18px) saturate(180%) brightness(1.1);
+
+  
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.28),
+    inset 1px 0 1px rgba(255, 255, 255, 0.22),
+    inset -1px 0 1px rgba(255, 255, 255, 0.22);
+
   transition:
     transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
-    opacity 0.22s ease;
-  outline: none;
-  /* Vibrancy: blur what sits behind (pad photo) */
-  -webkit-backdrop-filter: blur(50px) saturate(190%) brightness(1.05);
-  backdrop-filter: blur(50px) saturate(190%) brightness(1.05);
-  /* Fill + Shadow — Figma: 0 8px 40px / 12% */
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    background 0.22s ease,
+    box-shadow 0.22s ease,
+    opacity 0.22s ease,
+    filter 0.22s ease;
 }
 
-notify > *:not(notify-chrome) {
+notify::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.12) 28%,
+    transparent 58%
+  );
+  mix-blend-mode: screen;
+}
+
+notify > * {
   position: relative;
   z-index: 1;
 }
 
-/* Glass stack matching Figma: dodge → tint → screen → rim */
-notify-chrome {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-notify-dodge {
-  position: absolute;
-  inset: 0;
-  background: #262626;
-  mix-blend-mode: color-dodge;
-}
-
-notify-tint {
-  position: absolute;
-  inset: 0;
-  background: rgba(245, 245, 245, 0.67);
-}
-
-notify-glass {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.2);
-  mix-blend-mode: screen;
-}
-
-notify-rim {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  box-shadow:
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.75),
-    inset 0 -0.5px 0 rgba(0, 0, 0, 0.04),
-    inset 0 0 0 0.5px rgba(255, 255, 255, 0.4);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.08) 32%,
-    rgba(255, 255, 255, 0) 60%
-  );
+@supports (backdrop-filter: url(#notify-liquid)) {
+  notify {
+    -webkit-backdrop-filter: blur(4px) saturate(180%) brightness(1.1) url(#notify-liquid);
+    backdrop-filter: blur(4px) saturate(180%) brightness(1.1) url(#notify-liquid);
+  }
 }
 
 notify:hover {
-  transform: scale(1.012);
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 12px 44px rgba(0, 0, 0, 0.16),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.32),
+    inset 1px 0 1px rgba(255, 255, 255, 0.25),
+    inset -1px 0 1px rgba(255, 255, 255, 0.25);
+}
+
+notify:active {
+  transform: scale(0.985);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 notify:focus-visible {
   box-shadow:
     0 0 0 3px rgba(0, 122, 255, 0.45),
-    0 8px 40px rgba(0, 0, 0, 0.12);
+    0 8px 40px rgba(0, 0, 0, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.28);
 }
 
 notify[data-dismissed='true'] {
@@ -378,9 +391,17 @@ notify[data-dismissed='true'] {
   transform: translateY(-8px) scale(0.98);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  notify,
+  notify:hover,
+  notify:active {
+    transition: opacity 0.15s ease;
+    transform: none;
+  }
+}
+
 notify-icon {
   display: block;
-  position: relative;
   width: 32px;
   height: 32px;
   border-radius: 7.2px;
@@ -413,7 +434,7 @@ notify-time {
   font-size: 11px;
   font-weight: 400;
   line-height: 14px;
-  color: #bfbfbf;
+  color: rgba(0, 0, 0, 0.35);
   text-align: right;
   white-space: nowrap;
 }
@@ -446,7 +467,6 @@ notify-preview {
   word-break: break-word;
 }
 
-/* —— macOS Mail window —— */
 mail {
   position: absolute;
   z-index: 4;
@@ -662,8 +682,13 @@ digest-foot {
 
 @media (max-width: 720px) {
   pad {
-    border-radius: 32px;
-    margin: 48px auto;
+    
+    width: 100%;
+    max-width: none;
+    height: 99vh;
+    aspect-ratio: auto;
+    margin: 24px auto;
+    border-radius: 28px;
   }
 
   notify {
