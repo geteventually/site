@@ -6,7 +6,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="canonical" href="https://geteventually.com" />
-    <!-- Open Graph / Facebook, LinkedIn, Pinterest, WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://geteventually.com" />
     <meta property="og:title" content="Eventually | Revisit your saved tweets" />
@@ -17,7 +16,6 @@
     <meta property="og:image:alt" content="Eventually — Bet you have hundreds of saved tweets. Use Eventually to actually revisit them. Download Chrome Extension. Works with X bookmarks." />
     <meta property="og:site_name" content="Eventually" />
     <meta property="og:locale" content="en_US" />
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://geteventually.com" />
     <meta name="twitter:title" content="Eventually | Revisit your saved tweets" />
@@ -181,7 +179,7 @@
             aria-label="Open Mail notification: 5 bookmarks worth revisiting"
           >
             <notify-icon aria-hidden="true">
-              <img src="/apple_mail.png" width="32" height="32" alt="" draggable="false" />
+              <img src="/apple_mail.png" width="38" height="38" alt="" draggable="false" />
             </notify-icon>
             <notify-body>
               <notify-title>5 bookmarks worth revisiting</notify-title>
@@ -193,7 +191,6 @@
             <notify-time>now</notify-time>
           </notify>
 
-          <!-- Liquid Glass refraction (Chromium backdrop-filter:url) -->
           <svg
             class="liquid-glass-defs"
             width="0"
@@ -220,7 +217,7 @@
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="blurred"
-                scale="28"
+                scale="8"
                 xChannelSelector="R"
                 yChannelSelector="G"
               />
@@ -241,9 +238,6 @@
                 <traffic-btn class="zoom" aria-hidden="true"></traffic-btn>
               </mail-traffic>
               <mail-title>Inbox</mail-title>
-              <mail-toolbar aria-hidden="true">
-                <span></span><span></span><span></span>
-              </mail-toolbar>
             </mail-chrome>
             <mail-header>
               <mail-row>
@@ -397,15 +391,46 @@
         if (!notify || !mail || !closeBtn) return;
 
         let lastFocus = null;
+        let closeTimer = 0;
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            notify.dataset.ready = "true";
+          });
+        });
+
+        function setMailOriginFromNotify() {
+          const stage = notify.closest("stage") || notify.parentElement;
+          if (!stage) return;
+          const s = stage.getBoundingClientRect();
+          const n = notify.getBoundingClientRect();
+          const cx = s.left + s.width / 2;
+          const cy = s.top + s.height / 2;
+          const nx = n.left + n.width / 2;
+          const ny = n.top + n.height / 2;
+          mail.style.setProperty("--mail-from-x", `${Math.round(nx - cx)}px`);
+          mail.style.setProperty("--mail-from-y", `${Math.round(ny - cy)}px`);
+          mail.style.setProperty(
+            "--mail-ox",
+            `${(((nx - s.left) / s.width) * 100).toFixed(1)}%`
+          );
+          mail.style.setProperty(
+            "--mail-oy",
+            `${(((ny - s.top) / s.height) * 100).toFixed(1)}%`
+          );
+        }
 
         function openMail() {
           lastFocus = document.activeElement;
+          window.clearTimeout(closeTimer);
+          setMailOriginFromNotify();
           mail.hidden = false;
           notify.setAttribute("aria-expanded", "true");
           notify.dataset.dismissed = "true";
+          mail.offsetWidth;
           requestAnimationFrame(() => {
             mail.dataset.open = "true";
-            closeBtn.focus();
+            closeBtn.focus({ preventScroll: true });
           });
         }
 
@@ -413,11 +438,12 @@
           delete mail.dataset.open;
           notify.setAttribute("aria-expanded", "false");
           delete notify.dataset.dismissed;
-          window.setTimeout(() => {
+          window.clearTimeout(closeTimer);
+          closeTimer = window.setTimeout(() => {
             if (mail.dataset.open) return;
             mail.hidden = true;
-            (lastFocus || notify).focus();
-          }, 280);
+            (lastFocus || notify).focus({ preventScroll: true });
+          }, 320);
         }
 
         function onActivate(event) {
@@ -426,6 +452,18 @@
           if (mail.dataset.open) closeMail();
           else openMail();
         }
+
+        notify.addEventListener("pointerdown", (event) => {
+          if (event.button != null && event.button !== 0) return;
+          notify.dataset.pressed = "true";
+        });
+        function clearPress() {
+          delete notify.dataset.pressed;
+        }
+        notify.addEventListener("pointerup", clearPress);
+        notify.addEventListener("pointercancel", clearPress);
+        notify.addEventListener("pointerleave", clearPress);
+        notify.addEventListener("lostpointercapture", clearPress);
 
         notify.addEventListener("click", onActivate);
         notify.addEventListener("keydown", onActivate);
