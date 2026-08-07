@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   background-color: #fff;
@@ -48,7 +48,7 @@ hero {
   font-size: clamp(3.75rem, 1.0714rem + 8.5714vw, 7.5rem);
   font-style: normal;
   font-variation-settings: normal;
-  font-weight: 599;
+  font-weight: 600;
   letter-spacing: -1.2px;
   line-height: 1.05;
   margin-bottom: 0;
@@ -163,7 +163,7 @@ cta note {
 story heading {
   display: block;
   margin: 0;
-  font-weight: 599;
+  font-weight: 600;
   font-feature-settings: normal;
   font-size: clamp(2.75rem, 1.0714rem + 5.7143vw, 5.5rem);
   font-style: normal;
@@ -181,7 +181,7 @@ story quote {
   font-size: clamp(2.75rem, 1.0714rem + 5.7143vw, 5.5rem);
   font-style: normal;
   font-variation-settings: normal;
-  font-weight: 599;
+  font-weight: 600;
   letter-spacing: -0.78px;
   line-height: 1.05;
   text-align: center;
@@ -193,7 +193,7 @@ callout emphasis {
   font-size: clamp(2.75rem, 1.0714rem + 5.7143vw, 5.5rem);
   font-style: normal;
   font-variation-settings: normal;
-  font-weight: 599;
+  font-weight: 600;
   letter-spacing: -0.78px;
   line-height: 1.05;
   text-align: center;
@@ -206,7 +206,7 @@ panel lede {
   font-size: clamp(2.75rem, 1.0714rem + 5.7143vw, 5.5rem);
   font-style: normal;
   font-variation-settings: normal;
-  font-weight: 599;
+  font-weight: 600;
   letter-spacing: -0.78px;
   line-height: 1.05;
   text-align: center;
@@ -219,7 +219,7 @@ panel prose {
   font-size: clamp(2.75rem, 1.0714rem + 5.7143vw, 5.5rem);
   font-style: normal;
   font-variation-settings: normal;
-  font-weight: 599;
+  font-weight: 600;
   letter-spacing: -0.78px;
   line-height: 1.05;
   text-align: center;
@@ -780,7 +780,9 @@ copy {
 }
 
 brand {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-style: italic;
+  font-weight: 400;
 }
 
 footlinks {
