@@ -140,8 +140,9 @@ cta blurb {
   max-width: 36em;
 }
 
-cta action,
-actions action {
+cta > a,
+actions > a,
+.install-download {
   font-size: 18px;
   color: #fff;
   background: #000;
@@ -152,13 +153,22 @@ actions action {
   text-decoration: none;
   font-weight: 700;
   letter-spacing: 0.04em;
-  transition: all 0.17s ease-out;
+  transition: transform 0.17s ease-out;
   transform: scale(1);
+  cursor: pointer;
 }
 
-cta action:hover,
-actions action:hover {
+cta > a:hover,
+actions > a:hover,
+.install-download:hover {
   transform: scale(1.05);
+}
+
+cta > a:focus-visible,
+actions > a:focus-visible,
+.install-download:focus-visible {
+  outline: 3px solid #fffd01;
+  outline-offset: 3px;
 }
 
 cta note {
@@ -208,6 +218,8 @@ panel lede {
 
 actions subline {
   display: block;
+  opacity: 0.45;
+  font-size: 15px;
 }
 
 footlinks dot {
@@ -252,7 +264,7 @@ badge {
 pad {
   display: block;
   box-sizing: border-box;
-  
+
   --pad-ratio: 1234 / 800;
   width: min(100%, 1234px, calc(80vh * 1234 / 800));
   max-width: 1234px;
@@ -965,12 +977,6 @@ footlinks {
   display: block;
 }
 
-action {
-  display: inline;
-  color: inherit;
-  text-decoration: underline;
-}
-
 tagline,
 copy {
   display: block;
@@ -1003,4 +1009,94 @@ footlinks a:hover {
 copy, tagline {
   margin-bottom: 20px;
   opacity: 0.6;
+}
+
+body.install {
+  text-align: left;
+}
+
+.install-shell {
+  display: block;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 10vh 24px 96px;
+}
+
+.install-home {
+  display: inline-block;
+  margin-bottom: 48px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 27px;
+  line-height: 1.19;
+}
+
+.install-home:hover brand {
+  background: #fffd01;
+}
+
+.install-blurb {
+  font-size: 18px;
+  line-height: 1.45;
+  opacity: 0.55;
+  margin-bottom: 8px;
+  max-width: 28em;
+}
+
+.install-download {
+  margin: 28px 0 48px;
+}
+
+.install-steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  gap: 18px;
+  margin: 0 0 40px;
+  padding: 0;
+}
+
+.install-steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.6em;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.install-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 999px;
+  background: #fffd01;
+  color: #000;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0;
+  display: grid;
+  place-items: center;
+}
+
+.install-steps code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.08em 0.35em;
+  border-radius: 6px;
+  user-select: all;
+}
+
+.install-note {
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.45;
+  max-width: 32em;
+}
+
+.install-note a {
+  color: inherit;
 }

@@ -1,0 +1,14 @@
+{
+  "headers": [
+    {
+      "source": "/extension/eventually.zip",
+      "headers": [
+        { "key": "Content-Type", "value": "application/zip" },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"eventually.zip\""
+        }
+      ]
+    }
+  ]
+}

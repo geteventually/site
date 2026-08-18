@@ -103,7 +103,7 @@ Keep motion small and purposeful (CTA + prop states). No ambient glow loops.
 
 | Platform | Status |
 |----------|--------|
-| Chrome | Primary CTA (URL TBD — wire real store link) |
+| Chrome | Primary CTA → `/extension` (zip download + load-unpacked steps). Store link later. |
 | Safari | Coming soon |
 | Firefox | Coming soon |
 
