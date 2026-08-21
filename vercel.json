@@ -9,6 +9,16 @@
       "source": "/extension/:path*",
       "destination": "https://chromewebstore.google.com/detail/eventually/bookjpmfndgpnpcghokednemmockchcn",
       "permanent": true
+    },
+    {
+      "source": "/billing",
+      "destination": "https://api.geteventually.com/v1/billing/login",
+      "permanent": false
+    },
+    {
+      "source": "/billing/",
+      "destination": "https://api.geteventually.com/v1/billing/login",
+      "permanent": false
     }
   ]
 }
